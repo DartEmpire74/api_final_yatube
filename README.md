@@ -47,7 +47,7 @@ python3 manage.py runserver
 ### Endpoint-ы
 `api/v1/posts/:` Посты.
 
-Пример `GET` запроса: http://yourdomain.com/v1/posts/
+Пример `GET` запроса: http://yourdomain.com/api/v1/posts/
 
 Ответ: 
 ```
@@ -74,7 +74,7 @@ python3 manage.py runserver
 
 `api/v1/groups/:` Группы.
 
-Пример `GET` запроса: http://yourdomain.com/v1/groups/
+Пример `GET` запроса: http://yourdomain.com/api/v1/groups/
 
 Ответ: 
 ```
