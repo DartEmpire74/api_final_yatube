@@ -46,24 +46,9 @@ class FollowViewSet(viewsets.ModelViewSet):
         return Follow.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        following_username = self.request.data.get('following')
-        if not following_username:
-            raise ValidationError({"following": ["Это обязательное поле!"]})
-
-        following_user = get_object_or_404(User, username=following_username)
-
-        if following_user == self.request.user:
-            raise ValidationError(
-                {"following": ["Нельзя подписаться на себя!"]})
-
-        if Follow.objects.filter(
-            user=self.request.user, following=following_user
-        ).exists():
-            raise ValidationError(
-                {"following": ["Вы уже подписаны на этого пользователя!"]})
-
-        serializer.save(user=self.request.user, following=following_user)
-
+        serializer.save(
+            user=self.request.user, 
+            following=serializer.validated_data['following'])
 
 class CommentViewSet(viewsets.ModelViewSet):
     """API-Endpoint для просмотра, создания или редактирования комментариев."""
