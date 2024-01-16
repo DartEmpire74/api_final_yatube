@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import filters, viewsets
-from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import (
     IsAuthenticated, IsAuthenticatedOrReadOnly)
@@ -47,8 +46,9 @@ class FollowViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(
-            user=self.request.user, 
+            user=self.request.user,
             following=serializer.validated_data['following'])
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     """API-Endpoint для просмотра, создания или редактирования комментариев."""
